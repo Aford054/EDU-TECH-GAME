@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment · First Bank</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* Payment page specific styles */
+        body {
+            background: linear-gradient(145deg, #f5f7fc 0%, #e9edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .payment-card {
+            max-width: 540px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25),
+                        0 8px 24px -8px rgba(0, 0, 0, 0.08);
+            padding: 2.2rem 2rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .payment-card:hover {
+            transform: scale(1.01);
+        }
+
+        .bank-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 2px solid #f0f3fa;
+            padding-bottom: 1.2rem;
+        }
+
+        .bank-icon {
+            background: #003366;
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 6px 12px rgba(0, 51, 102, 0.2);
+        }
+
+        .bank-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #0b1e33;
+        }
+
+        .bank-name small {
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #4a5e7a;
+            margin-left: 6px;
+            letter-spacing: 0;
+        }
+
+        .payment-amount {
+            background: #e8f0fe;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 16px 0 20px;
+            text-align: center;
+            border: 2px solid #d4e0f0;
+        }
+
+        .payment-amount .amount-label {
+            font-size: 0.9rem;
+            color: #4a5e7a;
+            font-weight: 500;
+        }
+
+        .payment-amount .amount-value {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #003366;
+        }
+
+        .payment-amount .amount-value i {
+            font-size: 1.8rem;
+            margin-right: 4px;
+        }
+
+        .payment-amount .amount-desc {
+            font-size: 0.85rem;
+            color: #60758f;
+            margin-top: 4px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #edf2f9;
+        }
+
+        .detail-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #2c3f5c;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-label i {
+            color: #003366;
+            width: 1.2rem;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #0a1a2e;
+            font-size: 1.05rem;
+            text-align: right;
+            word-break: break-word;
+            max-width: 60%;
+        }
+
+        .account-number {
+            background: #f0f6ff;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            letter-spacing: 0.5px;
+            color: #002b54;
+            font-weight: 700;
+            border: 1px solid #d9e4f5;
+        }
+
+        .account-name {
+            font-weight: 700;
+            color: #001f3f;
+        }
+
+        .action-wrapper {
+            margin-top: 2.4rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-complete {
+            background: #003366;
+            border: none;
+            padding: 1rem 2.4rem;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 18px rgba(0, 51, 102, 0.25);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            justify-content: center;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .btn-complete i {
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-complete:hover {
+            background: #002a55;
+            transform: scale(1.01);
+            box-shadow: 0 12px 28px rgba(0, 51, 102, 0.35);
+        }
+
+        .btn-complete:hover i {
+            transform: translateX(4px);
+        }
+
+        .btn-complete:active {
+            transform: scale(0.96);
+            background: #001f40;
+        }
+
+        .secure-hint {
+            margin-top: 1.6rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #60758f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        .secure-hint i {
+            color: #2b7a4b;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.2rem;
+            color: #406c8f;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.15s;
+        }
+
+        .back-link:hover {
+            color: #1f4a6b;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .payment-card {
+                padding: 1.8rem 1.2rem 2rem;
+                border-radius: 2rem;
+            }
+            .bank-name {
+                font-size: 1.5rem;
+            }
+            .detail-row {
+                flex-wrap: wrap;
+                gap: 0.2rem 0;
+            }
+            .detail-value {
+                max-width: 100%;
+                text-align: left;
+                font-size: 1rem;
+                padding-left: 2rem;
+            }
+            .detail-label {
+                width: 100%;
+            }
+            .account-number {
+                display: inline-block;
+                padding: 0.2rem 0.6rem;
+            }
+            .btn-complete {
+                font-size: 1rem;
+                padding: 0.9rem 1.8rem;
+            }
+            .payment-amount .amount-value {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-card">
+        <!-- Bank Header -->
+        <div class="bank-header">
+            <div class="bank-icon">
+                <i class="fas fa-university"></i>
+            </div>
+            <span class="bank-name">
+                First Bank
+                <small>NG</small>
+            </span>
+        </div>
+
+        <!-- Payment Amount -->
+        <div class="payment-amount">
+            <div class="amount-label">Amount to pay</div>
+            <div class="amount-value"><i class="fas fa-naira-sign"></i> 1,000</div>
+            <div class="amount-desc">Unlock 15 additional questions (total 20)</div>
+        </div>
+
+        <!-- Account Details -->
+        <div class="detail-row">
+            <span class="detail-label">
+                <i class="fas fa-building-columns"></i> Bank
+            </span>
+            <span class="detail-value" style="font-weight: 500;">First Bank</span>
+        </div>
+
+        <div class="detail-row">
+            <span class="detail-label">
+                <i class="fas fa-hashtag"></i> Account number
+            </span>
+            <span class="detail-value account-number">
+                3184756075
+            </span>
+        </div>
+
+        <div class="detail-row">
+            <span class="detail-label">
+                <i class="fas fa-user"></i> Account name
+            </span>
+            <span class="detail-value account-name">
+                Abdulfatai Abdullah oladimeji
+            </span>
+        </div>
+
+        <!-- Payment Complete Button -->
+        <div class="action-wrapper">
+            <a href="index.html?payment=success" class="btn-complete" id="paymentCompleteBtn">
+                <i class="fas fa-check-circle"></i> I have paid ₦1,000
+            </a>
+        </div>
+
+        <!-- Secure Hint -->
+        <div class="secure-hint">
+            <i class="fas fa-lock"></i> <span>Secured · First Bank</span>
+        </div>
+
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Cancel and return to quiz</a>
+    </div>
+</body>
+</html>

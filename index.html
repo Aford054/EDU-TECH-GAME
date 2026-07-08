@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduQuiz · CBT - 10 Subjects</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="game-container" id="appContainer">
+        <header>
+            <h1><i class="fas fa-graduation-cap"></i> EduQuiz · CBT</h1>
+            <div class="timer-header">
+                <i class="fas fa-clock"></i>
+                <span id="timerDisplay">10:00</span>
+            </div>
+        </header>
+
+        <!-- Subject Selector -->
+        <div class="subject-selector" id="subjectSelector">
+            <label for="subjectSelect"><i class="fas fa-book-open"></i> Select Subject:</label>
+            <select id="subjectSelect">
+                <option value="english">Use of English</option>
+                <option value="mathematics">Mathematics</option>
+                <option value="physics">Physics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="biology">Biology</option>
+                <option value="economics">Economics</option>
+                <option value="government">Government</option>
+                <option value="literature">Literature in English</option>
+                <option value="accounting">Accounting</option>
+                <option value="commerce">Commerce</option>
+            </select>
+            <button class="btn btn-primary" id="startSubjectBtn"><i class="fas fa-play"></i> Start</button>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar" id="statusBar">
+            <span class="q-counter"><i class="far fa-question-circle"></i> <span id="questionCounter">1</span>/20</span>
+            <span class="score-badge"><i class="fas fa-check-circle"></i> Score: <span id="scoreDisplay">0</span></span>
+            <span class="mid-score" id="midScoreDisplay">⏳ 0/20</span>
+            <span class="subject-badge" id="subjectBadge">English</span>
+        </div>
+
+        <!-- Question Area -->
+        <div class="question-box" id="questionBox">
+            <div class="question-text" id="questionText">Loading question...</div>
+            <div class="options-grid" id="optionsContainer"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-bar" id="actionBar">
+            <div class="nav-buttons">
+                <button class="btn btn-outline" id="prevBtn"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-outline" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="submitBtn"><i class="fas fa-flag-checkered"></i> Finish</button>
+            </div>
+        </div>
+
+        <!-- Paywall -->
+        <div id="paywallContainer" class="paywall-box hidden">
+            <div class="paywall-content">
+                <span><i class="fas fa-lock"></i> <strong>Subscription required</strong></span>
+                <span class="paywall-price"><i class="fas fa-naira-sign"></i> 1,000</span>
+                <span>— Unlock 15 more questions (total 20)</span>
+            </div>
+            <a href="payment.html" class="pay-link" id="paymentLink"><i class="fas fa-credit-card"></i> Pay now</a>
+        </div>
+
+        <!-- Payment Blocked Message -->
+        <div id="paymentBlockedMessage" class="payment-blocked hidden">
+            <i class="fas fa-exclamation-circle"></i>
+            <span><strong>Payment required!</strong> Pay <i class="fas fa-naira-sign"></i> 1,000 to access questions 6–20.</span>
+            <a href="payment.html" class="pay-link-small"><i class="fas fa-credit-card"></i> Subscribe now</a>
+        </div>
+
+        <!-- Result -->
+        <div id="resultContainer" class="hidden" style="margin-top:20px; background:#e2f0e8; border-radius:40px; padding:24px; text-align:center;">
+            <h2 style="color:#0b3a28;"><i class="fas fa-trophy"></i> Quiz completed!</h2>
+            <p style="font-size:1.8rem; font-weight:700; color:#144d34;">Your score: <span id="finalScore">0</span>/20</p>
+            <p style="color:#1f5a3f;">Correct answers: <span id="correctCountDisplay">0</span> out of 20</p>
+            <button class="btn btn-success" id="restartBtn" style="margin-top:12px;"><i class="fas fa-redo-alt"></i> Restart</button>
+        </div>
+
+        <div class="footer-meta">
+            <i class="fas fa-school"></i> LASUED · EdTech 200L · 2026/2027
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
